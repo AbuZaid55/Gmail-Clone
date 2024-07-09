@@ -46,7 +46,7 @@ const SendEmail = () => {
             <form onSubmit={submitHandler} className='flex flex-col p-3 gap-2'>
              <input onChange={changeHandler} value={formData.to} name="to" type="text" placeholder='To' className='outline-none py-1'/>
              <input onChange={changeHandler} value={formData.subject} name="subject" type="text" placeholder='Subject' className='outline-none py-1'/>
-             <textarea onChange={changeHandler} value={formData.message} name="message"  rows={'10'} cols={'30'} className='outline-none py-1'></textarea>
+             <textarea onChange={changeHandler} placeholder='Message' value={formData.message} name="message"  rows={'10'} cols={'30'} className='outline-none py-1'></textarea>
              <button type='submit' className='bg-blue-700 rounded-full px-5 py-1 w-fit text-white'>Send</button>
             </form>
         </div>

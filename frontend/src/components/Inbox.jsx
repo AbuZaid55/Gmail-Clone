@@ -48,7 +48,7 @@ const Inbox = () => {
                     {
                         mailType.map((item, index) => {
                             return (
-                                <button onClick={() => setSelected(index)} className={` ${selected === index ? "border-b-4 border-b-blue-600 text-blue-600" : "border-b-4 border-b-transparent"} flex items-center gap-5 p-4 w-52 hover:bg-gray-100`}>
+                                <button key={item.text} onClick={() => setSelected(index)} className={` ${selected === index ? "border-b-4 border-b-blue-600 text-blue-600" : "border-b-4 border-b-transparent"} flex items-center gap-5 p-4 w-52 hover:bg-gray-100`}>
                                     {item.icon}
                                     <span>{item.text}</span>
                                 </button>

@@ -1,28 +1,40 @@
-import React, { useEffect } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
-import Sidebar from './Sidebar'
-import { useSelector } from 'react-redux';
-import Navbar from './Navbar';
+import React, { useEffect } from "react";
+import { Outlet, useNavigate} from "react-router-dom";
+import Sidebar from "./Sidebar";
+import { useDispatch } from "react-redux";
+import Navbar from "./Navbar";
+import axios from "axios";
+import { setAuthUser } from '../redux/appSlice';
 
 const Body = () => {
-  const { user } = useSelector(store => store.app);
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, [user])
+    const getUser = async () => {
+        try {
+          const res = await axios.get("http://localhost:8080/api/v1/user/getuser", {
+              withCredentials:true
+          })
+          if(res.data.success){
+              dispatch(setAuthUser(res.data.user))
+          }
+      } catch (error) {
+          console.log(error);
+          navigate('/login')
+      }
+    };
+    getUser()
+  }, []);
   return (
     <>
       <Navbar />
-      <div className='flex'>
+      <div className="flex">
         <Sidebar />
         <Outlet />
       </div>
-
     </>
-  )
-}
+  );
+};
 
-export default Body
+export default Body;
