@@ -27,13 +27,13 @@ const Body = () => {
     getUser()
   }, []);
   return (
-    <>
+    <div className="h-screen overflow-hidden">
       <Navbar />
       <div className="flex">
         <Sidebar />
         <Outlet />
       </div>
-    </>
+    </div>
   );
 };
 

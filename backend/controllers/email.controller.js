@@ -41,7 +41,7 @@ export const getAllEmailById = async (req,res)=>{
     try {
         const userId = req.id;
         
-        const emails = await Email.find({userId});
+        const emails = await Email.find({userId}).sort({createdAt:-1});
 
         return res.status(200).json({emails});
     } catch (error) {

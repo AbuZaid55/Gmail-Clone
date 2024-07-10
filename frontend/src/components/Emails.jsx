@@ -16,11 +16,10 @@ const Emails = () => {
   },[searchText, emails])
 
   return (
-    <div>
+    <div className='h-[79vh] overflow-y-auto'>
       {
         filterEmail && filterEmail?.map((email)=> <Email key={email._id} email={email}/> )
       }
-        
     </div>
   )
 }

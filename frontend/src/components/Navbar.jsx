@@ -69,7 +69,7 @@ const Navbar = () => {
                             <div className='p-2 rounded-full hover:bg-gray-200 cursor-pointer'>
                                 <TbGridDots size={'24px'} />
                             </div>
-                            <span onClick={logoutHandler} className='underline cursor-pointer'>Logout</span>
+                            <span onClick={logoutHandler} className='bg-blue-700 rounded-full px-5 py-2 w-fit text-white font-semibold cursor-pointer'>Logout</span>
                             <Avatar src={user.profilePhoto} size="40" round={true} />
                         </div>
                     </>
