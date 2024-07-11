@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import userRoute from "./routes/user.route.js";
 import emailRoute from "./routes/email.route.js";
+import {Server} from 'socket.io'
 
 dotenv.config({});
 connectDB();
@@ -26,6 +27,23 @@ app.use(cors(corsOptions));
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/email", emailRoute);
 
-app.listen(PORT, ()=>{
+const server = app.listen(PORT, ()=>{
     console.log(`Server running at port ${PORT}`);
 });
+
+
+const io = new Server(server,{
+    pingTimeout:60000,
+    cors:{
+        origin:"http://localhost:5173"
+    }
+})
+
+io.on("connection",(socket)=>{
+    socket.on('setup',(userId)=>{
+        socket.join(userId)
+    })
+    socket.on('newEmail',(email)=>{
+        socket.in(email.to).emit('newEmailRecieved',email)
+    })
+})

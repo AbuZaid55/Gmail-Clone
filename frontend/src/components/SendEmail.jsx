@@ -5,7 +5,7 @@ import { setEmails, setOpen } from '../redux/appSlice';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
-const SendEmail = () => {
+const SendEmail = ({socket}) => {
     const [formData, setFormData] = useState({
         to:"",
         subject:"",
@@ -27,6 +27,7 @@ const SendEmail = () => {
                 },
                 withCredentials:true
             });
+            socket.emit("newEmail",res.data.email)
             dispatch(setEmails([res.data.email,...emails]));
         } catch (error) {
             console.log(error);
