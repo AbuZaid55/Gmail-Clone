@@ -41,12 +41,13 @@ export const login = async(req,res)=>{
         if(!isPasswordMatch) return res.status(401).json({message:"Incorrect email or password", success:false});
 
         const tokenData = {
-            userId:user._id
+            userId:user._id,
+            email:user.email
         }
         const token = await jwt.sign(tokenData, process.env.SECRET_KEY, {expiresIn:'1d'});
         return res.status(200).cookie("token", token, {maxAge:1*24*60*60*1000, httpOnly:true, sameSite:'strict'}).json({
             message:`${user.fullname} logged in successfully.`,
-            user,
+            user:user,
             success:true
         })
     } catch (error) {
@@ -54,7 +55,13 @@ export const login = async(req,res)=>{
     }
 }
 export const getUser = async(req,res)=>{
-    res.status(200).json({success:true,user:req.user})
+    const userId = req.id
+    try {
+        const user = await User.findOne({_id:userId})
+        res.status(200).json({success:true,user:user})
+    } catch (error) {
+        console.log(error)
+    }
 }
 export const logout = async(req,res)=>{
     try {

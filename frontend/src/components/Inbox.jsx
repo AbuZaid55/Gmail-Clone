@@ -56,7 +56,7 @@ const Inbox = () => {
                         })
                     }
                 </div>
-                <Emails/>
+                <Emails path="inbox"/>
             </div>
         </div>
     )

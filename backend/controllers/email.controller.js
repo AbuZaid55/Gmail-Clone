@@ -37,12 +37,11 @@ export const deleteEmail = async (req,res) => {
     }
 }
 
-export const getAllEmailById = async (req,res)=>{
+export const getAllEmail = async (req,res)=>{
     try {
         const userId = req.id;
-        
-        const emails = await Email.find({userId}).sort({createdAt:-1});
-
+        const email = req.email;
+        const emails = await Email.find({"$or":[{userId:userId},{to:email}]}).sort({createdAt:-1});
         return res.status(200).json({emails});
     } catch (error) {
         console.log(error);

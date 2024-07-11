@@ -2,16 +2,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import Inbox from './components/Inbox'
-import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar'
 import Body from './components/Body'
 import Mail from './components/Mail'
 import SendEmail from './components/SendEmail'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import { Toaster } from 'react-hot-toast';
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import SendEmails from './components/SendEmails'
 
 const appRouter = createBrowserRouter([
   {
@@ -21,6 +18,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/",
         element: <Inbox />
+      },
+      {
+        path:"/sendemails",
+        element:<SendEmails/>
       },
       {
         path: "/mail/:id",

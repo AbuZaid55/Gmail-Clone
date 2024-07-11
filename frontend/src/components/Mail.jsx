@@ -2,6 +2,7 @@ import React from "react";
 import { IoMdArrowBack, IoMdMore } from "react-icons/io";
 import { useNavigate, useParams } from "react-router-dom";
 import { BiArchiveIn } from "react-icons/bi";
+import {fetchEmails} from "../hooks/useGetAllEmails";
 import {
   MdDeleteOutline,
   MdKeyboardArrowLeft,
@@ -12,12 +13,13 @@ import {
   MdOutlineReport,
   MdOutlineWatchLater,
 } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 const Mail = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const { selectedEmail } = useSelector((store) => store.app);
   const params = useParams();
   const deleteHandler = async () => {
@@ -27,7 +29,8 @@ const Mail = () => {
         { withCredentials: true }
       );
       toast.success(res.data.message);
-      navigate("/");
+      fetchEmails(dispatch)
+      navigate(-1);
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +67,7 @@ const Mail = () => {
       <div className="flex items-center justify-between px-4">
         <div className="flex items-center gap-2 text-gray-700 py-2">
           <div
-            onClick={() => navigate("/")}
+            onClick={() => navigate(-1)}
             className="p-2 rounded-full hover:bg-gray-200 hover:cursor-pointer"
           >
             <IoMdArrowBack size={"20px"} />

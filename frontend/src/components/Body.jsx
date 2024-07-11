@@ -5,8 +5,10 @@ import { useDispatch } from "react-redux";
 import Navbar from "./Navbar";
 import axios from "axios";
 import { setAuthUser } from '../redux/appSlice';
+import useGetAllEmails from '../hooks/useGetAllEmails'
 
 const Body = () => {
+  useGetAllEmails();
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
