@@ -5,7 +5,7 @@ import { setEmails } from "../redux/appSlice";
 
 export const fetchEmails = async (dispatch) => {
     try {
-        const res = await axios.get("http://localhost:8080/api/v1/email/getallemails", {
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/email/getallemails`, {
             withCredentials: true
         });
         dispatch(setEmails(res.data.emails));

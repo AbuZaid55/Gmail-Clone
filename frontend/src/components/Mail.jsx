@@ -25,7 +25,7 @@ const Mail = () => {
   const deleteHandler = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:8080/api/v1/email/${params.id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/email/${params.id}`,
         { withCredentials: true }
       );
       toast.success(res.data.message);
