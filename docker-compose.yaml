@@ -4,7 +4,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 8004:8004
     container_name: gmailclonebackend
     env_file:
       - ./backend/.env
@@ -16,7 +16,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - 5173:5173
+      - 3004:3004
     container_name: gmailclonefrontend
     env_file:
       - ./frontend/.env
@@ -28,4 +28,3 @@ services:
 networks:
   app-network:
     driver: bridge
-

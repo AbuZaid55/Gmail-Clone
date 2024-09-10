@@ -11,7 +11,7 @@ const SendEmail = ({socket}) => {
         subject:"",
         message:""
     })
-    const {open, emails} = useSelector(store => store.app);
+    const {open, emails,user} = useSelector(store => store.app);
     const dispatch = useDispatch();
 
     const changeHandler = (e) => {
@@ -27,8 +27,14 @@ const SendEmail = ({socket}) => {
                 },
                 withCredentials:true
             });
-            socket.emit("newEmail",res.data.email)
-            dispatch(setEmails([res.data.email,...emails]));
+            const obj = {...formData,userId:user._id,createdAt:new Date().toISOString()}
+            socket.emit("newEmail",obj)  
+            dispatch(setEmails([obj,...emails]));
+            setFormData({
+                to:"",
+                subject:"",
+                message:""
+            })
         } catch (error) {
             console.log(error);
             toast.error(error.response.data.message);

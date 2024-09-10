@@ -1,3 +1,4 @@
+import { produceEmail } from "../kafka/index.js";
 import { Email } from "../models/email.model.js";
 
 export const createEmail = async (req, res) => {
@@ -5,16 +6,11 @@ export const createEmail = async (req, res) => {
         const userId = req.id;
         const {to, subject, message} = req.body;
         if(!to || !subject || !message) return res.status(400).json({message:"All fields are required", success:false});
-        
-        const email = await Email.create({
-            to,
-            subject,
-            message,
-            userId
-        });
-        return res.status(201).json({
-            email
-        })
+
+        const _message = {to,subject,message,userId}
+        await produceEmail(JSON.stringify(_message))
+    
+        return res.status(201).json({message:"Email created success"})
     } catch (error) {
         console.log(error);
     }

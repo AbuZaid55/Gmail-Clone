@@ -24,7 +24,7 @@ const Emails = ({ path }) => {
   return (
     <div className="h-[79vh] overflow-y-auto">
       {filterEmail &&
-        filterEmail?.map((email) => <Email key={email._id} email={email} />)}
+        filterEmail?.map((email) => <Email key={email.createdAt} email={email} />)}
     </div>
   );
 };
