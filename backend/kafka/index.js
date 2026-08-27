@@ -7,19 +7,24 @@ const KAFKA_ENDPOINT = process.env.KAFKA_ENDPOINT
 const KAFKA_USERNAME = process.env.KAFKA_USERNAME 
 const KAFKA_PASSWORD = process.env.KAFKA_PASSWORD
 
+// const kafka = new Kafka({
+//     clientId: 'kafkajs',
+//     brokers: [KAFKA_ENDPOINT],
+//     connectionTimeout: 30000,
+//     retry: {
+//         retries: 10
+//     },
+//     ssl: true,
+//     sasl: {
+//         mechanism: 'scram-sha-256',
+//         username: KAFKA_USERNAME,
+//         password: KAFKA_PASSWORD
+//     }
+// });
+
 const kafka = new Kafka({
-    clientId: 'kafkajs',
-    brokers: [KAFKA_ENDPOINT],
-    connectionTimeout: 30000,
-    retry: {
-        retries: 10
-    },
-    ssl: true,
-    sasl: {
-        mechanism: 'scram-sha-256',
-        username: KAFKA_USERNAME,
-        password: KAFKA_PASSWORD
-    }
+    clientId: 'gmailclone',
+    brokers: [process.env.KAFKA_ENDPOINT],
 });
 let producer = null
 
